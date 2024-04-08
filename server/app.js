@@ -20,8 +20,8 @@ mongoose
 import postsRoute from './routes/posts.route';
 app.use("/post", postsRoute);
 
-import bookRoute from './routes/book.route';
-app.use("/book", bookRoute);
+import userRoute from './routes/user.route';
+app.use("/user", userRoute);
 
 //Default URL
 app.use("/", (req, res)=>{
