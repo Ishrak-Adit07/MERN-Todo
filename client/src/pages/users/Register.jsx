@@ -6,12 +6,23 @@ const Register = () => {
   const [error, setError] = useState(null);
 
   //Form data states
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  })
 
-  //Handle Log in
+
+  //Handle Register
   const handleRegister = (e) =>{
     e.preventDefault();
+
+    console.log(formData);
+    // setFormData({
+    //   email:"",
+    //   password:"",
+    //   confirmPassword:""
+    // })
   }
 
 
@@ -20,22 +31,28 @@ const Register = () => {
 
         <h1 className="title">Create new account</h1>
 
-        <form className='justify-center items-center h-screenitems-center'>
+        <form onSubmit={handleRegister} className="justify-center items-center h-screen">
 
             <input type="email" 
                    placeholder="Email address" 
                    className="input" 
                    autoFocus 
-                   value={email} 
-                   onChange={(e)=>{setEmail(e.target.value)}} />
+                   value={formData.email} 
+                   onChange={(e)=>{setFormData({...formData, email: e.target.value})}} />
 
             <input type="password" 
                    placeholder="Password" 
                    className="input" 
-                   value={password}
-                   onChange={(e)=>setPassword(e.target.value)} />
+                   value={formData.password}
+                   onChange={(e)=>{setFormData({...formData, password: e.target.value})}} />
 
-            <button className="btn" onSubmit={(e)=>{handleRegister(e)}}>Login</button>
+            <input type="password" 
+                   placeholder="Confirm Password" 
+                   className="input" 
+                   value={formData.confirmPassword}
+                   onChange={(e)=>{setFormData({...formData, confirmPassword: e.target.value})}} />
+
+            <button type="submit" className="btn">Register</button>
         </form>
 
         {error && <Alert msg={error}/>}
