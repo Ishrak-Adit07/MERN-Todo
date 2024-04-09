@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config.js'
 
-const createToken = (id) =>{
-    return jwt.sign({id}, process.env.SECRET_WEB_KEY, {expiresIn: "10d"});
+const createToken = (_id) =>{
+    return jwt.sign({_id}, process.env.SECRET_WEB_KEY, {expiresIn: "10d"});
 };
 
 const registerUser = async(req, res)=>{
