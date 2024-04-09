@@ -9,11 +9,11 @@
 
     .card {
         align-items: center;
-        @apply bg-white p-4 rounded-lg shadow-lg
+        @apply bg-white px-6 py-10 rounded-lg shadow-lg
     }
 
     .title {
-        @apply font-bold mb-6
+        @apply font-bold mb-8 text-2xl
     }
 
     .input {
@@ -21,6 +21,6 @@
     }
 
     .btn {
-        @apply block w-full bg-indigo-500 text-white rounded-md p-2
+        @apply block w-full bg-indigo-500 text-white rounded-md p-2 active:bg-indigo-600 
     }
 }
