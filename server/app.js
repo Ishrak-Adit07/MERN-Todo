@@ -18,10 +18,10 @@ mongoose
 
 //Importing the routes
 import postsRoute from './routes/posts.route';
-app.use("/post", postsRoute);
+app.use("/api/post", postsRoute);
 
 import userRoute from './routes/user.route';
-app.use("/user", userRoute);
+app.use("/api/user", userRoute);
 
 //Default URL
 app.use("/", (req, res)=>{
