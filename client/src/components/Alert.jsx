@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Alert = ({msg}) => {
+const Alert = ({ msg }) => {
   return (
-    <div className='bg-red-500 text-white p-2 rounded-md mt-6 text-sm justify-center items-center flex space-x-4'>
-      <i className="fa-solid fa-triangle-exclamation"></i>{msg}
+    <div className='bg-red-500 text-white p-2 rounded-md mt-6 text-sm justify-center items-center flex'>
+      <i className="fas fa-exclamation-triangle"></i>
+      <span>{msg}</span>
     </div>
   );
 }

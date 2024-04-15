@@ -25,11 +25,10 @@ const registerUser = async (email, password, confirmPassword) => {
         localStorage.setItem("webToken", responseData.webToken);
         localStorage.setItem("email", responseData.email);
 
-        console.log(responseData);
-
         return responseData;
     } catch (error) {
         console.error("Error:", error.message);
+        throw Error(error.message);
     }
 }
 
@@ -56,11 +55,10 @@ const loginUser = async (email, password) => {
         localStorage.setItem("webToken", responseData.webToken);
         localStorage.setItem("email", responseData.email);
 
-        console.log(responseData);
-
         return responseData;
     } catch (error) {
         console.error("Error:", error.message);
+        throw Error(error.message);
     }
 }
 

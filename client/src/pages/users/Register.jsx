@@ -17,10 +17,12 @@ const Register = () => {
   //Handle Register
   const handleRegister = async(e) =>{
     e.preventDefault();
-    console.log(formData);
+    console.log(formData.email, formData.password, formData.confirmPassword);
 
     try {
-      await registerUser(formData.email, formData.password, formData.confirmPassword);
+      const registerResponseData = await registerUser(formData.email, formData.password, formData.confirmPassword);
+
+      if(registerResponseData) setError(null);
     } catch (e) {
       setError(e.message);
     }
@@ -60,9 +62,9 @@ const Register = () => {
                    onChange={(e)=>{setFormData({...formData, confirmPassword: e.target.value})}} />
 
             <button type="submit" className="btn">Register</button>
-        </form>
 
-        {error && <Alert msg={error}/>}
+            {error && <Alert msg={error}/>}
+        </form>
 
     </section>
   );

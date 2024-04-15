@@ -22,7 +22,7 @@ const registerUser = async(req, res)=>{
     
             const exist = await User.findOne({email});
             if(exist){
-                res.status(404).send("Email is already in use");
+                res.status(404).send({error: "Email is already in use"});
             }
             else{
                 
@@ -49,23 +49,23 @@ const loginUser = async(req, res)=>{
     const {email, password} = req.body;
 
     if(!email || !password){
-        res.status(404).send("All fields are required");
+        res.status(404).send({error: "All fields are required"});
     }
 
     try {
         
         const user = await User.findOne({email});
         if(!user){
-            res.status(404).send("No such email found");
+            res.status(404).send({error: "No such email found"});
         }
         else{
             const match = await bcrypt.compare(password, user.password);
             if(!match){
-                res.status(404).send("Invalid Credentials");
+                res.status(404).send({error: "Invalid Credentials"});
             }
             else{
                 const webToken = createToken(user._id);
-                res.status(200).send({email, webToken});
+                res.status(201).send({email, webToken});
             }
         }
 

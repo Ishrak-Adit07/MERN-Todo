@@ -17,9 +17,11 @@ const Login = () => {
     console.log(email, password);
 
     try {
-      await loginUser(email, password);
-    } catch (e) {
-      setError(e.message);
+      const loginResponseData = await loginUser(email, password);
+      
+      if(loginResponseData) setError(null);
+    } catch (err) {
+      setError(err.message);
     }
     
     // setEmail("");
@@ -47,9 +49,9 @@ const Login = () => {
                    onChange={(e) => setPassword(e.target.value)} />
 
             <button type="submit" className="btn">Login</button>
+            {error && <Alert msg={error}/>}
         </form>
 
-        {error && <Alert msg={error}/>}
     </section>
   );
 }
