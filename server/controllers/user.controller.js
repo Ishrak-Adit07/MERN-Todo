@@ -32,7 +32,7 @@ const registerUser = async(req, res)=>{
 
                 const webToken = createToken(user._id);
                 
-                res.status(201).send({"message": email, webToken});
+                res.status(201).send({email, webToken});
 
             }
     

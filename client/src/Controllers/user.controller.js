@@ -1,6 +1,6 @@
 const registerUser = async (email, password) => {
     if (!email || !password) {
-        throw new Error("All fields are required");
+        throw Error("All fields are required");
     }
 
     try {
@@ -15,10 +15,15 @@ const registerUser = async (email, password) => {
         const responseData = await registerResponse.json();
 
         if (!registerResponse.ok) {
-            throw new Error(responseData.error);
+            throw Error(responseData.error);
         }
 
+        localStorage.setItem("webToken", responseData.webToken);
+        localStorage.setItem("email", responseData.email);
+
         console.log(responseData);
+
+        return responseData;
     } catch (error) {
         console.error("Error:", error.message);
     }
@@ -26,7 +31,7 @@ const registerUser = async (email, password) => {
 
 const loginUser = async (email, password) => {
     if (!email || !password) {
-        throw new Error("All fields are required");
+        throw Error("All fields are required");
     }
 
     try {
@@ -41,10 +46,15 @@ const loginUser = async (email, password) => {
         const responseData = await loginResponse.json();
 
         if (!loginResponse.ok) {
-            throw new Error(responseData.error);
+            throw Error(responseData.error);
         }
 
+        localStorage.setItem("webToken", responseData.webToken);
+        localStorage.setItem("email", responseData.email);
+
         console.log(responseData);
+
+        return responseData;
     } catch (error) {
         console.error("Error:", error.message);
     }
