@@ -20,7 +20,7 @@ const Register = () => {
     console.log(formData);
 
     try {
-      await registerUser(formData.email, formData.password);
+      await registerUser(formData.email, formData.password, formData.confirmPassword);
     } catch (e) {
       setError(e.message);
     }

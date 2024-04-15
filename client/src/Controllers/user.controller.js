@@ -1,6 +1,10 @@
-const registerUser = async (email, password) => {
-    if (!email || !password) {
+const registerUser = async (email, password, confirmPassword) => {
+    if (!email || !password || !confirmPassword) {
         throw Error("All fields are required");
+    }
+
+    if(password != confirmPassword){
+        throw Error("Passwords do not match");
     }
 
     try {
