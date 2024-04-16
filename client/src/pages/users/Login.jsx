@@ -2,11 +2,15 @@ import React, { useContext, useState } from 'react';
 import Alert from '../../components/Alert';
 import { loginUser } from '../../Controllers/user.controller';
 import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
   //UserContext
   const {setUser} = useContext(UserContext);
+
+  //UseNavigate
+  const navigate = useNavigate();
 
   // Error state
   const [error, setError] = useState(null);
@@ -30,6 +34,7 @@ const Login = () => {
           posts: []
         });
 
+        navigate("/dashboard");
         setError(null);
       }
     } catch (err) {

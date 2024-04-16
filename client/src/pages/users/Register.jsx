@@ -2,11 +2,15 @@ import React, { useContext, useState } from 'react';
 import Alert from '../../components/Alert';
 import { registerUser } from '../../Controllers/user.controller';
 import { UserContext } from '../../Context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
   //UserContext
   const {setUser} = useContext(UserContext);
+
+  //Use Navigate
+  const navigate = useNavigate();
 
   //Error state
   const [error, setError] = useState(null);
@@ -33,6 +37,8 @@ const Register = () => {
           email: formData.email,
           posts: []
         });
+
+        navigate("/dashboard");
 
         setError(null);
       }
