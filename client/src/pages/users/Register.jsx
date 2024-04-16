@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Alert from '../../components/Alert';
 import { registerUser } from '../../Controllers/user.controller';
+import { UserContext } from '../../Context/UserContext';
 
 const Register = () => {
+
+  //UserContext
+  const {setUser} = useContext(UserContext);
+
   //Error state
   const [error, setError] = useState(null);
 
@@ -17,12 +22,20 @@ const Register = () => {
   //Handle Register
   const handleRegister = async(e) =>{
     e.preventDefault();
-    console.log(formData.email, formData.password, formData.confirmPassword);
+    //console.log(formData.email, formData.password, formData.confirmPassword);
 
     try {
       const registerResponseData = await registerUser(formData.email, formData.password, formData.confirmPassword);
 
-      if(registerResponseData) setError(null);
+      if(registerResponseData){
+
+        setUser({
+          email: formData.email,
+          posts: []
+        });
+
+        setError(null);
+      }
     } catch (e) {
       setError(e.message);
     }
