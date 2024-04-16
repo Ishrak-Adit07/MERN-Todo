@@ -7,11 +7,11 @@ const Home = () => {
         <header className="bg-indigo-500 text-white">
 
             <nav className="flex items-center justify-between p-4">
-                <Link to="/home" className="fa-solid fa-house-chimney nav-link"></Link>
+                <Link title="Home" to="/home" className="fa-solid fa-house-chimney nav-link"></Link>
 
                 <div className="flex items-center gap-2">
-                    <Link to="/login" className="fa-solid fa-right-to-bracket nav-link"></Link>
-                    <Link to="/register" className="fa-solid fa-registered nav-link"></Link>
+                    <Link title="Log in" to="/login" className="fa-solid fa-right-to-bracket nav-link"></Link>
+                    <Link title="Register" to="/register" className="fa-solid fa-registered nav-link"></Link>
                 </div>
 
             </nav>
