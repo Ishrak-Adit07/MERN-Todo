@@ -31,7 +31,7 @@ const PostHome = () => {
             <i class="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
           }
 
-          {posts && posts.map((post) => 
+          {!loading && posts && posts.map((post) => 
             <div key={post._id}>
               <Post post={post}></Post>
             </div>
