@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getPosts } from '../../Controllers/post.controller';
 import { PostContext } from '../../Context/PostContext';
 import Post from '../../components/Post';
@@ -7,13 +7,16 @@ const PostHome = () => {
 
   const {posts, setPosts} = useContext(PostContext);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(()=>{
 
     setTimeout(async()=>{
       const postData = await getPosts();
 
       setPosts(postData.posts);
-    }, 500);
+      setLoading(false);
+    }, 1000);
 
   }, []);
 
@@ -23,9 +26,14 @@ const PostHome = () => {
         <h1 className='title'>Latest Posts</h1>
 
         <div>
+
+          {loading && 
+            <i class="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
+          }
+
           {posts && posts.map((post) => 
             <div key={post._id}>
-              <Post post={post}/>
+              <Post post={post}></Post>
             </div>
           )}
         </div>
