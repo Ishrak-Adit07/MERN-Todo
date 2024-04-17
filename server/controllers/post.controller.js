@@ -10,7 +10,7 @@ const getPosts = async(req, res)=>{
 
     } catch (e) {
         console.log(e);
-        res.status(500).send({message: e.message});
+        res.status(500).send({error: e.message});
     }
 }
 
@@ -28,7 +28,7 @@ const getUserPosts = async(req, res) =>{
 
     } catch (e) {
         console.log(e);
-        res.status(404).send({message: e.message});       
+        res.status(404).send({error: e.message});       
     }
 }
 
@@ -56,7 +56,7 @@ const addPost = async(req, res)=>{
 
     } catch (e) {
         //console.log(e);
-        res.status(500).send({message: e.message});
+        res.status(500).send({error: e.message});
     }
 }
 

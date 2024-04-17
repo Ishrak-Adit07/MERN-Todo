@@ -15,7 +15,7 @@ const registerUser = async(req, res)=>{
     try {
 
         if(!email || !password){
-            res.status(404).send("All fields required");
+            res.status(404).send({error: "All fields required"});
         }
     
         else{

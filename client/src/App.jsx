@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/users/Login';
 import Register from './pages/users/Register';
 import Dashboard from './pages/users/Dashboard';
+import PostHome from './pages/posts/PostHome';
 
 const App = () => {
   return (
@@ -12,6 +13,8 @@ const App = () => {
       <Routes>
 
         <Route path="/" element={<Home />} >
+
+          <Route index element={<PostHome />} />
 
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
