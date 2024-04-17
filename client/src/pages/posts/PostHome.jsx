@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { getPosts } from '../../Controllers/post.controller';
+import { PostContext } from '../../Context/PostContext';
+import Post from '../../components/Post';
 
 const PostHome = () => {
+
+  const {posts, setPosts} = useContext(PostContext);
 
   useEffect(()=>{
 
     setTimeout(async()=>{
       const postData = await getPosts();
-      console.log(postData);
+
+      setPosts(postData.posts);
     }, 500);
 
   }, []);
@@ -17,7 +22,13 @@ const PostHome = () => {
 
         <h1 className='title'>Latest Posts</h1>
 
-        <div>posts</div>
+        <div>
+          {posts && posts.map((post) => 
+            <div key={post._id}>
+              <Post post={post}/>
+            </div>
+          )}
+        </div>
 
     </section>
   );

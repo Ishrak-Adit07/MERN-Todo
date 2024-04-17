@@ -6,7 +6,7 @@ const getPosts = async(req, res)=>{
     try {
         
         const posts = await Post.find();
-        res.status(200).send(posts);
+        res.status(200).send({posts});
 
     } catch (e) {
         console.log(e);
@@ -24,7 +24,7 @@ const getUserPosts = async(req, res) =>{
         const user_id = user._id.toString();
         const posts = await Post.find({user_id});
 
-        res.status(200).send(posts);
+        res.status(200).send({posts});
 
     } catch (e) {
         console.log(e);
