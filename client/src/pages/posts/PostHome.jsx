@@ -28,7 +28,7 @@ const PostHome = () => {
         <div>
 
           {loading && 
-            <i class="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
+            <i className="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
           }
 
           {!loading && posts && posts.map((post) => 
