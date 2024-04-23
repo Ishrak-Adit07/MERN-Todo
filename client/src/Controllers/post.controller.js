@@ -50,4 +50,24 @@ const createPost = async(caption, body) =>{
     return data;
 }
 
-export { getPosts, getUserPosts, createPost }
+const deletePost = async(_id) =>{
+
+    const response = await fetch("/api/post", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('webToken')}`
+        },
+        body: JSON.stringify({id: _id})
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+        throw Error(data.error);
+    }
+
+    return data;
+}
+
+export { getPosts, getUserPosts, createPost, deletePost }
