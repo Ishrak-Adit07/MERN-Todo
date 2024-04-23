@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { getUserPosts } from '../../Controllers/post.controller';
+import { deletePost, getUserPosts } from '../../Controllers/post.controller';
 import Post from '../../components/Post';
 import { UserContext } from '../../Context/UserContext';
 import { Link } from 'react-router-dom'
+import Alert from '../../components/Alert';
+import Success from '../../components/Success';
 
 const Dashboard = () => {
 
   const {user, setUser} = useContext(UserContext)
 
   const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState(null);
+  const [deleteSuccess, setDeleteSuccess] = useState(null);
 
   useEffect(()=>{
 
@@ -25,8 +30,28 @@ const Dashboard = () => {
 
   }, []);
 
-  const handleDeletePost = (post_id) =>{
-    console.log("Post deleted");
+  const handleDeletePost = async(_id) =>{
+    try {
+
+      const data = await deletePost(_id);
+      console.log(data.message);
+
+      setTimeout(async()=>{
+        setLoading(true);  
+        
+        location.reload();
+  
+        setLoading(false);
+      }, 1000);
+
+      setDeleteSuccess(true);
+
+      setError(null);
+
+    } catch (err) {
+      setError(err.error);
+      console.log(err);
+    }
   }
 
   return (
@@ -39,6 +64,9 @@ const Dashboard = () => {
           {loading && 
             <i className="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
           }
+
+          {deleteSuccess && <Success msg={"Post was deleted"}/>}
+          {error && <Alert msg={error} />}
 
           {!loading && user.posts && user.posts.map((post) => 
             <div key={post._id}>
