@@ -93,7 +93,7 @@ const deletePost  = async(req, res)=>{
 
 const updatePost  = async(req, res)=>{
 
-    const {id, caption} = req.body;
+    const {id, caption, body} = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         res.status(404).send({error: "Incorrect ID"});
@@ -112,7 +112,7 @@ const updatePost  = async(req, res)=>{
     else{
         try {
         
-            await Post.findByIdAndUpdate(id, {caption});
+            await Post.findByIdAndUpdate(id, {caption, body});
             res.status(200).send({message: "Post was updated"})
     
         } catch (e) {

@@ -70,4 +70,28 @@ const deletePost = async(_id) =>{
     return data;
 }
 
-export { getPosts, getUserPosts, createPost, deletePost }
+const updatePost = async(_id, caption, body) =>{
+
+    if(!caption || !body){
+        throw Error("All fields are required");
+    }
+
+    const response = await fetch("/api/post", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('webToken')}`
+        },
+        body: JSON.stringify({id: _id, caption, body})
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+        throw Error(data.error);
+    }
+
+    return data;
+}
+
+export { getPosts, getUserPosts, createPost, deletePost, updatePost }

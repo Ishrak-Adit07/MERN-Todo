@@ -1,41 +1,44 @@
 import React, { useContext, useState } from 'react';
-import { createPost } from '../../Controllers/post.controller';
+import { updatePost } from '../../Controllers/post.controller';
 import Alert from '../../components/Alert';
 import { PostContext } from '../../Context/PostContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Success from '../../components/Success';
 
 const UpdatePost = () => {
 
   const {posts, setPosts} = useContext(PostContext);
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  console.log(location);
+  const {state} = useLocation();
 
   const [error, setError] = useState(null);
+  const [updateSuccess, setUpdateSuccess] = useState(null);
 
-  const [caption, setCaption] = useState("");
-  const [body, setBody] = useState("");
+  const [caption, setCaption] = useState(state.post.caption);
+  const [body, setBody] = useState(state.post.body);
+
+    const backToDashboard = () =>{
+        navigate("/dashboard");
+    }
 
     const handleUpdatePost = async(e) =>{
         e.preventDefault();
 
-        // try {
+        try {
 
-        //     const data = await createPost(caption, body);
-        //     console.log(data.newPost);
+            const data = await updatePost(state.post._id, caption, body);
+            console.log(data);
+            console.log(data.message);
 
-        //     setPosts(...posts, data.newPost);
+            setUpdateSuccess(true);
+            setError(null);
 
-        //     navigate("/dashboard");
-
-        // } catch (err) {
-        //     setError(err.message);
-        //     console.log(err.message);
-        // }
-
-        setError(null);
+        } catch (err) {
+            setError(err.message);
+            setUpdateSuccess(false);
+            console.log(err.message);
+        }
 
     }
 
@@ -57,12 +60,18 @@ const UpdatePost = () => {
                       onChange={(e) => setBody(e.target.value)}></textarea>
 
             <button className='btn' type='submit'>
-                Submit
+                Edit
             </button>
 
-            {error && <Alert msg={error}/>}
+            <button className='btn mt-10 mb-4' onClick={backToDashboard}>
+                Back
+            </button>
+
+            {updateSuccess && <Success msg={"Post was updated"}/>}
+            {error && <Alert msg={error} />}
 
         </form>
+
     </section>
   );
 }

@@ -70,7 +70,7 @@ const Dashboard = () => {
               <Post post={post}>
                 <div className="flex items-center gap-2">
                   <Link className="fa-solid fa-pen-to-square nav-link text-green-500 hover:bg-green-200" title="Update" to="/updatePost"
-                  state={{name : "Jon"}}></Link>
+                  state={{post}}></Link>
                   <button className='fa-solid fa-trash-can nav-link text-red-500 hover:bg-red-200' title='Delete' onClick={()=>{
                     handleDeletePost(post._id)
                   }}></button>
