@@ -52,7 +52,7 @@ const addPost = async(req, res)=>{
         const newPost = await Post.create(postDetails);
         console.log(caption);
 
-        res.status(201).send(newPost);
+        res.status(201).send({newPost});
 
     } catch (e) {
         //console.log(e);

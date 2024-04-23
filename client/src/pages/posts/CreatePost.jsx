@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createPost } from '../../Controllers/post.controller';
 import Alert from '../../components/Alert';
+import { PostContext } from '../../Context/PostContext';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
+
+  const {posts, setPosts} = useContext(PostContext);
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
 
@@ -11,13 +17,15 @@ const CreatePost = () => {
 
     const handleCreatePost = async(e) =>{
         e.preventDefault();
-        console.log("Post created");
-        console.log(caption, body);
 
         try {
 
             const data = await createPost(caption, body);
-            console.log(data);
+            console.log(data.newPost);
+
+            setPosts(...posts, data.newPost);
+
+            navigate("/dashboard");
 
         } catch (err) {
             setError(err.message);
