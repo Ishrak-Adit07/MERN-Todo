@@ -65,9 +65,6 @@ const Dashboard = () => {
             <i className="fa-solid fa-spinner animate-spin text-3xl text-center-block"></i>
           }
 
-          {deleteSuccess && <Success msg={"Post was deleted"}/>}
-          {error && <Alert msg={error} />}
-
           {!loading && user.posts && user.posts.map((post) => 
             <div key={post._id}>
               <Post post={post}>
@@ -80,6 +77,9 @@ const Dashboard = () => {
               </Post>
             </div>
           )}
+
+          {deleteSuccess && <Success msg={"Post was deleted"}/>}
+          {error && <Alert msg={error} />}
       </div>
 
 
