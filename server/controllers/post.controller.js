@@ -35,7 +35,7 @@ const getUserPosts = async(req, res) =>{
 const addPost = async(req, res)=>{
     try {
         
-        const {caption, photo} = req.body;
+        const {caption, body} = req.body;
 
         if(!caption){
             return res.status(400).send({error: "Caption is required"});
@@ -46,7 +46,7 @@ const addPost = async(req, res)=>{
         const postDetails = {
             user_id : user._id,
             caption: caption,
-            photo: photo        
+            body: body        
         }
 
         const newPost = await Post.create(postDetails);

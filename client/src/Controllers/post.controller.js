@@ -27,4 +27,27 @@ const getUserPosts = async() =>{
     return data;
 }
 
-export { getPosts, getUserPosts }
+const createPost = async(caption, body) =>{
+    if(!caption || !body){
+        throw Error("All field are required");
+    }
+
+    const response = await fetch("/api/post", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('webToken')}`
+        },
+        body: JSON.stringify({caption, body})
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+        throw Error(data.error);
+    }
+
+    return data;
+}
+
+export { getPosts, getUserPosts, createPost }
