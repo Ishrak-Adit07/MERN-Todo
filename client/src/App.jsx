@@ -7,6 +7,8 @@ import Dashboard from './pages/users/Dashboard';
 import PostHome from './pages/posts/PostHome';
 import CreatePost from './pages/posts/CreatePost';
 import UpdatePost from './pages/posts/UpdatePost';
+import AuthRoutes from './RoutesProtection/AuthRoutes';
+import GuestRoutes from './RoutesProtection/GuestRoutes';
 
 const App = () => {
   return (
@@ -18,12 +20,21 @@ const App = () => {
 
           <Route index element={<PostHome />} />
 
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route element={<AuthRoutes />}>
+    
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="createPost" element={<CreatePost />} />
+            <Route path="updatePost" element={<UpdatePost />} />
 
-          <Route path="createPost" element={<CreatePost />} />
-          <Route path="updatePost" element={<UpdatePost />} />
+          </Route>
+
+          <Route element={<GuestRoutes />}>
+
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+
+          </Route>
+
 
         </Route>
 
